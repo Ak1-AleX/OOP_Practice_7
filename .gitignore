@@ -1,0 +1,36 @@
+# Build directories
+build/
+*/build/
+Build/
+*/Build/
+*.build/
+Debug/
+Release/
+*.app/
+*.dmg
+
+# Qt Creator
+*.pro.user
+*.pro.user.*
+*.autosave
+
+# qmake build files
+Makefile*
+*.o
+*.obj
+*.moc
+*.rcc
+*.ui
+moc_*.cpp
+qrc_*.cpp
+
+# Executables (на всякий случай, хотя они в build/)
+PolynomClient
+PolynomServer
+*.exe
+
+# OS
+.DS_Store
+Thumbs.db
+*.orig
+*.swp
