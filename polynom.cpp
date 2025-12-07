@@ -6,20 +6,34 @@
 #include "complex.h"
 
 template<typename T>
-Polynom<T>::Polynom() : degree(0), leadingCoeff(T(1.0, 0.0)) {
-    coefficients = Array<T>(1, T(0.0, 0.0));
+Polynom<T>::Polynom() : degree(0), leadingCoeff(T(1.0)) {
+    coefficients = Array<T>(1, T(0.0));
     roots = Array<T>(0);
 }
 
 template<typename T>
 Polynom<T>::Polynom(int n, T an) : degree(n), leadingCoeff(an) {
     if (n > 0) {
-        coefficients = Array<T>(n + 1, T(0.0, 0.0));
-        roots = Array<T>(n, T(0.0, 0.0));
+        coefficients = Array<T>(n + 1, T(0.0));
+        roots = Array<T>(n, T(0.0));
         coefficients.setElement(n, an);
     } else {
         degree = 0;
-        coefficients = Array<T>(1, T(0.0, 0.0));
+        coefficients = Array<T>(1, T(0.0));
+        roots = Array<T>(0);
+    }
+}
+
+// НОВЫЙ конструктор для полинома x^n (для работы №7)
+template<typename T>
+Polynom<T>::Polynom(int n) : degree(n), leadingCoeff(T(1.0)) {
+    if (n > 0) {
+        coefficients = Array<T>(n + 1, T(0.0));
+        coefficients.setElement(n, T(1.0));  // x^n
+        roots = Array<T>(n, T(0.0));  // все корни = 0
+    } else {
+        degree = 0;
+        coefficients = Array<T>(1, T(1.0));  // x^0 = 1
         roots = Array<T>(0);
     }
 }
@@ -31,14 +45,14 @@ void Polynom<T>::calculateCoefficients() {
         return;
     }
 
-    coefficients = Array<T>(degree + 1, T(0.0, 0.0));
+    coefficients = Array<T>(degree + 1, T(0.0));
     coefficients.setElement(degree, leadingCoeff);
 
     for (int k = 1; k <= degree; k++) {
-        T sum = T(0.0, 0.0);
+        T sum = T(0.0);
 
         for (int i = 0; i < degree; i++) {
-            T product = T(1.0, 0.0);
+            T product = T(1.0);
             int count = 0;
 
             for (int j = i; j < degree && count < k; j++) {
@@ -54,14 +68,14 @@ void Polynom<T>::calculateCoefficients() {
         if (k % 2 == 0) {
             coefficients.setElement(degree - k, leadingCoeff * sum);
         } else {
-            coefficients.setElement(degree - k, T(-1.0, 0.0) * leadingCoeff * sum);
+            coefficients.setElement(degree - k, T(-1.0) * leadingCoeff * sum);
         }
     }
 }
 
 template<typename T>
 T Polynom<T>::evaluate(T x) const {
-    if (isEmpty()) return T(0.0, 0.0);
+    if (isEmpty()) return T(0.0);
 
     T result = coefficients.getElement(degree);
     for (int i = degree - 1; i >= 0; i--) {
@@ -75,7 +89,7 @@ T Polynom<T>::getCoefficient(int index) const {
     if (index >= 0 && index <= degree) {
         return coefficients.getElement(index);
     }
-    return T(0.0, 0.0);
+    return T(0.0);
 }
 
 template<typename T>
@@ -97,7 +111,7 @@ T Polynom<T>::getRoot(int index) const {
     if (index >= 0 && index < degree) {
         return roots.getElement(index);
     }
-    return T(0.0, 0.0);
+    return T(0.0);
 }
 
 template<typename T>
@@ -110,7 +124,7 @@ QString Polynom<T>::toStringForm1() const {
     for (int i = degree; i >= 0; i--) {
         T coeff = coefficients.getElement(i);
 
-        if (coeff == T(0.0, 0.0)) continue;
+        if (coeff == T(0.0)) continue;
 
         if (!firstTerm) {
             if (coeff.real() >= 0 && coeff.imag() >= 0) {
@@ -157,16 +171,16 @@ void Polynom<T>::setFromRoots(int n, T an, const QVector<T>& rootsList) {
     leadingCoeff = an;
 
     if (n > 0) {
-        roots = Array<T>(n, T(0.0, 0.0));
+        roots = Array<T>(n, T(0.0));
         for (int i = 0; i < n && i < rootsList.size(); i++) {
             roots.setElement(i, rootsList[i]);
         }
         calculateCoefficients();
     } else {
-        coefficients = Array<T>(1, T(0.0, 0.0));
+        coefficients = Array<T>(1, T(0.0));
         roots = Array<T>(0);
     }
 }
 
-// Явная инстанциация шаблонов
+// Явная инстанциация для TComplex
 template class Polynom<TComplex>;

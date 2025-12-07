@@ -8,8 +8,10 @@
 
 template<typename T>
 class Polynom {
-private:
+protected:  // ДЛЯ РАБОТЫ №7: coefficients должен быть доступен потомкам
     Array<T> coefficients;
+
+private:
     Array<T> roots;
     int degree;
     T leadingCoeff;
@@ -18,7 +20,8 @@ private:
 
 public:
     Polynom();
-    Polynom(int n, T an = T(1.0, 0.0));
+    Polynom(int n, T an = T(1.0));
+    Polynom(int n); // Конструктор для полинома x^n (добавлено для работы №7)
 
     T evaluate(T x) const;
 
