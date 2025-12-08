@@ -18,7 +18,7 @@ QVector<number> TFsin<number>::calculateDerivatives(int degree) const {
     QVector<number> derivatives;
     derivatives.reserve(degree + 1);
 
-    // Производные sin(x) в точке 0: 0, 1, 0, -1, 0, 1, 0, -1, ...
+    // Производные sin(x) в точке 0
     for (int n = 0; n <= degree; n++) {
         switch (n % 4) {
         case 0: // sin(0) = 0

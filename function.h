@@ -7,7 +7,7 @@
 #include <QVector>
 #include <QString>
 
-// Шаблон класса ФУНКЦИЯ согласно методичке
+// Шаблон класса ФУНКЦИЯ
 template<typename number>
 class TFunction : protected Polynom<number> {
 public:

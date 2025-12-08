@@ -10,7 +10,7 @@ TFSi<number>::TFSi(int degree)
     // Вычисляем производные для Si(x)
     QVector<number> derivatives = calculateDerivativesSi(degree);
 
-    // Сохраняем производные (для предотвращения утечки памяти)
+    // Сохраняем производные
     d = new number[degree + 1];
     for (int i = 0; i <= degree; i++) {
         d[i] = derivatives[i];

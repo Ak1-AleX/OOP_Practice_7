@@ -8,7 +8,7 @@
 
 template<typename T>
 class Polynom {
-protected:  // ДЛЯ РАБОТЫ №7: coefficients должен быть доступен потомкам
+protected:
     Array<T> coefficients;
 
 private:
@@ -21,7 +21,7 @@ private:
 public:
     Polynom();
     Polynom(int n, T an = T(1.0));
-    Polynom(int n); // Конструктор для полинома x^n (добавлено для работы №7)
+    Polynom(int n); // Конструктор для полинома x^n
 
     T evaluate(T x) const;
 

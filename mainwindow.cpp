@@ -32,7 +32,6 @@ MainWindow::~MainWindow()
 {
     delete sinFunction;
     delete siFunction;
-    // currentFunction не удаляем - это тот же объект
     delete ui;
 }
 

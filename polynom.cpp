@@ -24,7 +24,7 @@ Polynom<T>::Polynom(int n, T an) : degree(n), leadingCoeff(an) {
     }
 }
 
-// НОВЫЙ конструктор для полинома x^n (для работы №7)
+// НОВЫЙ конструктор для полинома x^n
 template<typename T>
 Polynom<T>::Polynom(int n) : degree(n), leadingCoeff(T(1.0)) {
     if (n > 0) {
